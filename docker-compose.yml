@@ -8,3 +8,15 @@ services:
       - 2379:2379
     volumes:
       - ./config:/config
+  redis:
+    image: redis:5-alpine
+    ports:
+      - 6379:6379
+  resque:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.resque
+    links:
+      - redis
+    ports:
+      - 5678:5678

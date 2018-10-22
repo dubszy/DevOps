@@ -1,0 +1,10 @@
+FROM alpine:3.8
+
+RUN apk add --update \
+    g++ libc-dev make ruby ruby-bundler ruby-dev ruby-json ruby-webrick zlib-dev \
+    && echo 'gem: --no-document' >> /etc/gemrc \
+    && gem install resque-web
+
+EXPOSE 5678
+
+ENTRYPOINT resque-web -FLd -s webrick -r 'redis:6379'
