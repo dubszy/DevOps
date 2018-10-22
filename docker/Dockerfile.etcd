@@ -1,0 +1,18 @@
+FROM alpine:3.8
+
+RUN apk add --update ca-certificates openssl tar \
+    && wget https://github.com/coreos/etcd/releases/download/v3.3.10/etcd-v3.3.10-linux-amd64.tar.gz \
+    && tar xzvf etcd-v3.3.10-linux-amd64.tar.gz \
+    && mv etcd-v3.3.10-linux-amd64/etcd* /bin/ \
+    && apk del --purge tar openssl \
+    && rm -rf etcd-v3.3.10-linux-amd64* /var/cache/apk/*
+
+EXPOSE 2379 2380
+
+ENTRYPOINT ( /bin/etcd -listen-client-urls http://0.0.0.0:2379 -advertise-client-urls http://0.0.0.0:2379 & ) \
+             # Wait for etcd to start
+             && sleep 1 \
+             # Configure etcd (Set values, etc...)
+             && /config/etcd-config.sh \
+             # Tail /dev/null to keep the container alive
+             && tail -f /dev/null

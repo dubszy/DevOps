@@ -1,0 +1,7 @@
+# Sample etcd configuration
+
+# To configure etcd, copy this file and rename it to "etcd-config.sh"
+# etcd-config.sh is .gitignored to remove the possibility of committing
+# keys and authentication info.
+
+etcdctl set someKey someValue

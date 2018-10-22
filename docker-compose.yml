@@ -1,0 +1,10 @@
+version: '3'
+services:
+  etcd:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.etcd
+    ports:
+      - 2379:2379
+    volumes:
+      - ./config:/config
