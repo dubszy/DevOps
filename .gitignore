@@ -1,3 +1,10 @@
 .DS_Store
 
 etcd-config.sh
+
+data/persistent/artifactory/access/*
+data/persistent/artifactory/backup/*
+data/persistent/artifactory/data/*
+data/persistent/artifactory/etc/*
+data/persistent/artifactory/logs/*
+!data/persistent/artifactory/access/.gitkeep
