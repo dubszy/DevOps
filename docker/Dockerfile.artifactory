@@ -1,0 +1,32 @@
+FROM ubuntu:artful
+
+ENV ARTIFACTORY_VERSION 6.5.2
+
+RUN \
+  apt-get update -y \
+  && apt-get install -y --no-install-recommends \
+  # We need ca-certificates to verify the certificate we get while fetching Artifactory
+  ca-certificates \
+  # Artifactory needs Java
+  openjdk-9-jdk \
+  # Need to be able to fetch Artifactory
+  wget \
+  # For unzipping Artifactory
+  unzip \
+  # Fetch Artifactory
+  && wget "https://api.bintray.com/content/jfrog/artifactory/jfrog-artifactory-oss-${ARTIFACTORY_VERSION}.zip;bt_package=jfrog-artifactory-oss-zip" -O artifactory.zip \
+  # Unzip it
+  && unzip artifactory.zip -d / \
+  # Rename the root folder to something cleaner
+  && mv "/artifactory-oss-${ARTIFACTORY_VERSION}" /artifactory \
+  # Remove the zip
+  && rm artifactory.zip \
+  # Clean up
+  && apt-get clean
+
+ENV ARTIFACTORY_HOME /artifactory
+
+EXPOSE 8081
+
+# Run Artifactory
+ENTRYPOINT /artifactory/bin/artifactory.sh

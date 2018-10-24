@@ -1,5 +1,17 @@
 version: '3'
 services:
+  artifactory:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.artifactory
+    ports:
+      - 8081:8081
+    volumes:
+      - ./data/persistent/artifactory/access:/artifactory/access
+      - ./data/persistent/artifactory/backup:/artifactory/backup
+      - ./data/persistent/artifactory/data:/artifactory/data
+      - ./data/persistent/artifactory/etc:/artifactory/etc
+      - ./data/persistent/artifactory/logs:/artifactory/logs
   etcd:
     build:
       context: .
