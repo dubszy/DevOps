@@ -8,3 +8,10 @@ data/persistent/artifactory/data/*
 data/persistent/artifactory/etc/*
 data/persistent/artifactory/logs/*
 !data/persistent/artifactory/access/.gitkeep
+!data/persistent/artifactory/backup/.gitkeep
+!data/persistent/artifactory/data/.gitkeep
+!data/persistent/artifactory/etc/.gitkeep
+!data/persistent/artifactory/logs/.gitkeep
+
+data/persistent/jenkins/*
+!data/persistent/jenkins/.gitkeep
