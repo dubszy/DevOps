@@ -1,5 +1,8 @@
 .DS_Store
 
+.gradle
+.idea
+
 etcd-config.sh
 
 data/persistent/artifactory/access/*
