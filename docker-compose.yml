@@ -7,11 +7,11 @@ services:
     ports:
       - 8081:8081
     volumes:
-      - ./data/persistent/artifactory/access:/artifactory/access
-      - ./data/persistent/artifactory/backup:/artifactory/backup
-      - ./data/persistent/artifactory/data:/artifactory/data
-      - ./data/persistent/artifactory/etc:/artifactory/etc
-      - ./data/persistent/artifactory/logs:/artifactory/logs
+      - ./vdata/persistent/artifactory/access:/artifactory/access
+      - ./vdata/persistent/artifactory/backup:/artifactory/backup
+      - ./vdata/persistent/artifactory/data:/artifactory/data
+      - ./vdata/persistent/artifactory/etc:/artifactory/etc
+      - ./vdata/persistent/artifactory/logs:/artifactory/logs
   etcd:
     build:
       context: .
@@ -29,7 +29,7 @@ services:
       - 8082:8080
       - 50000:50000
     volumes:
-      - ./data/persistent/jenkins:/var/jenkins_home
+      - ./vdata/persistent/jenkins:/var/jenkins_home
   redis:
     image: redis:5-alpine
     ports:
