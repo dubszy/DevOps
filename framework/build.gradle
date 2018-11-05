@@ -1,0 +1,12 @@
+group 'com.mwaltman.devops'
+version '0.0.1'
+
+dependencies {
+
+    String dwHibernateVersion = '1.3.2'
+    String junitVersion = '4.12'
+
+    compile group: 'io.dropwizard', name: 'dropwizard-hibernate', version: dwHibernateVersion
+
+    testCompile group: 'junit', name: 'junit', version: junitVersion
+}

@@ -2,6 +2,7 @@
 
 .gradle
 .idea
+*.iml
 
 etcd-config.sh
 
@@ -18,3 +19,9 @@ vdata/persistent/artifactory/logs/*
 
 vdata/persistent/jenkins/*
 !vdata/persistent/jenkins/.gitkeep
+
+vdata/persistent/monitor/web/gradle/*
+vdata/persistent/monitor/web/logs/*
+!vdata/persistent/monitor/web/gradle/.gitkeep
+!vdata/persistent/monitor/web/gradle/root/.gitkeep
+!vdata/persistent/monitor/web/logs/.gitkeep

@@ -1,0 +1,19 @@
+group 'com.mwaltman.devops'
+version '0.0.1'
+
+apply plugin: 'application'
+
+dependencies {
+
+    String junitVersion = '4.12'
+
+    testCompile group: 'junit', name: 'junit', version: junitVersion
+}
+
+mainClassName = 'com.mwaltman.devops.worker.WorkerApplication'
+applicationDefaultJvmArgs = ['-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5007']
+
+run {
+    //noinspection GroovyAssignabilityCheck
+    args 'worker', "$rootProject.projectDir/framework/config/app_config.yml"
+}
