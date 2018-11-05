@@ -1,14 +1,32 @@
 group 'com.mwaltman'
-version '0.1'
+version '0.0.1'
 
-apply plugin: 'java'
-
-sourceCompatibility = 1.8
-
-repositories {
-    mavenCentral()
+allprojects {
+    apply plugin: 'idea'
 }
 
-dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+subprojects {
+    apply plugin: 'java'
+
+    sourceCompatibility = 1.8
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+
+        String etcd4jVersion     = '2.16.0'
+        String httpClientVersion = '4.5.6'
+        String jedisVersion      = '2.9.0'
+        String junitVersion      = '4.12'
+        String lombokVersion     = '1.18.4'
+
+        compile group: 'org.apache.httpcomponents', name: 'httpclient', version: httpClientVersion
+        compile group: 'org.mousio', name: 'etcd4j', version: etcd4jVersion
+        compile group: 'org.projectlombok', name: 'lombok', version: lombokVersion
+        compile group: 'redis.clients', name: 'jedis', version: jedisVersion
+
+        testCompile group: 'junit', name: 'junit', version: '4.12'
+    }
 }

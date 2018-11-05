@@ -1,0 +1,19 @@
+template: "Hello, %s"
+
+logging:
+  level: WARN
+
+  loggers:
+    "com.mwaltman.devops": DEBUG
+
+  appenders:
+    - type: console
+      timeZone: UTC
+      logFormat: "%d{HH:mm:ss.SSS [%thread] %-5level %logger{36} - %msg%n"
+      target: stderr
+    - type: file
+      threshold: ALL
+      currentLogFilename: ./../logs/dropwizard.log
+      archivedLogFilenamePattern: ./../logs/dropwizard-%d.log.gz
+      archivedFileCount: 5
+      timeZone: UTC
