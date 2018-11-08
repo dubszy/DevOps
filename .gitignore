@@ -6,6 +6,8 @@
 
 etcd-config.sh
 
+sensitive_config.yml
+
 vdata/persistent/artifactory/access/*
 vdata/persistent/artifactory/backup/*
 vdata/persistent/artifactory/data/*
