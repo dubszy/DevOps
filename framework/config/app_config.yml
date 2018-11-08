@@ -1,7 +1,7 @@
 template: "Hello, %s"
 
 logging:
-  level: WARN
+  level: INFO
 
   loggers:
     "com.mwaltman.devops": DEBUG
@@ -17,3 +17,5 @@ logging:
       archivedLogFilenamePattern: ./../logs/dropwizard-%d.log.gz
       archivedFileCount: 5
       timeZone: UTC
+# Keep a newline with no whitespace at the end of this file because we tack
+# another config on the end of this one via merging two input streams

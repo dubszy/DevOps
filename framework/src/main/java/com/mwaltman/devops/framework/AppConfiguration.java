@@ -6,11 +6,16 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 public class AppConfiguration extends Configuration {
 
+    protected static final transient String ADDITIONAL_CONFIG_FILE_NAME = "sensitive_config.yml";
+
     @NotEmpty
     private String template;
 
     @NotEmpty
     private String defaultName = "Stranger";
+
+    @NotEmpty
+    private String etcdUrl;
 
     @JsonProperty
     public String getTemplate() {
@@ -30,5 +35,15 @@ public class AppConfiguration extends Configuration {
     @JsonProperty
     public void setDefaultName(String defaultName) {
         this.defaultName = defaultName;
+    }
+
+    @JsonProperty
+    public String getEtcdUrl() {
+        return etcdUrl;
+    }
+
+    @JsonProperty
+    public void setEtcdUrl(String etcdUrl) {
+        this.etcdUrl = etcdUrl;
     }
 }
