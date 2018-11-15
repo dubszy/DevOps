@@ -3,6 +3,8 @@ version '0.0.1'
 
 dependencies {
 
+    compile project(':core')
+
     String dwHibernateVersion = '1.3.2'
     String junitVersion = '4.12'
 
