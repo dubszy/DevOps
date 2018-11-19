@@ -49,7 +49,7 @@ public final class ApiClient implements Closeable {
      * {@link EntityUtils} fails to consume the request entity.
      */
     public HttpResponse call(final HttpRequestBase request) {
-        log.debug("[API] Call to {} {}", request.getMethod(), request.getURI());
+        log.debug("[API] Call to {} {} {}", request.getMethod(), request.getURI(), request.getAllHeaders());
 
         /* We need to modify this while locked on httpClient inside the try
          * block and consume the response entity in the finally block, so don't
@@ -67,7 +67,7 @@ public final class ApiClient implements Closeable {
             StatusLine statusLine = rawResponse.getStatusLine();
 
             return new HttpResponse(
-                    Integer.toString(statusLine.getStatusCode()),
+                    statusLine.getStatusCode(),
                     statusLine.getReasonPhrase(),
                     rawResponse.getAllHeaders(),
                    EntityUtils.toString(rawResponse.getEntity()));

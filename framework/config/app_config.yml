@@ -8,11 +8,11 @@ logging:
 
   appenders:
     - type: console
+      discardingThreshold: 0
       timeZone: UTC
       logFormat: "%d{HH:mm:ss.SSS [%thread] %-5level %logger{36} - %msg%n"
       target: stderr
     - type: file
-      threshold: ALL
       currentLogFilename: ./../logs/dropwizard.log
       archivedLogFilenamePattern: ./../logs/dropwizard-%d.log.gz
       archivedFileCount: 5
