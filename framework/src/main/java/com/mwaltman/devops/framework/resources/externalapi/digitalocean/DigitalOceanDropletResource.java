@@ -29,6 +29,7 @@ public class DigitalOceanDropletResource {
     private String sizeSlug;
     private DigitalOceanNetworksResource networks;
     private DigitalOceanKernelResource kernel;
+    private DigitalOceanBackupWindowResource nextBackupWindow;
     private List<String> tags;
     @JsonProperty("volume_ids")
     private List<String> volumeUuids;
