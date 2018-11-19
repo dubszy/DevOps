@@ -2,7 +2,7 @@ package com.mwaltman.devops.framework.health;
 
 import com.codahale.metrics.health.HealthCheck;
 import com.mwaltman.devops.framework.externalapi.HttpResponse;
-import com.mwaltman.devops.framework.externalapi.digitalocean.DigitalOceanAccountApi;
+import com.mwaltman.devops.framework.externalapi.digitalocean.ExternalDigitalOceanAccountApi;
 
 import static com.mwaltman.devops.framework.util.StringUtils.WS_26_SPACES;
 
@@ -12,15 +12,15 @@ import static com.mwaltman.devops.framework.util.StringUtils.WS_26_SPACES;
  */
 public class DigitalOceanHealthCheck extends HealthCheck {
 
-    private final DigitalOceanAccountApi accountApi;
+    private final ExternalDigitalOceanAccountApi externalDigitalOceanAccountApi;
 
-    public DigitalOceanHealthCheck(DigitalOceanAccountApi accountApi) {
-        this.accountApi = accountApi;
+    public DigitalOceanHealthCheck(ExternalDigitalOceanAccountApi externalDigitalOceanAccountApi) {
+        this.externalDigitalOceanAccountApi = externalDigitalOceanAccountApi;
     }
 
     @Override
     protected Result check() throws Exception {
-        HttpResponse response = accountApi.getAccountInformation().getResponse();
+        HttpResponse response = externalDigitalOceanAccountApi.getAccountInformation().getResponse();
         if (response.getStatusCode() == 200) {
             return Result.healthy();
         }

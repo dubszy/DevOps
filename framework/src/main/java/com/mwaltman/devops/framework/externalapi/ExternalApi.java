@@ -44,7 +44,8 @@ public abstract class ExternalApi {
      * @see DeserializationFeature#UNWRAP_ROOT_VALUE Unwrap root value deserialization feature
      */
     protected <T extends ApiResponseResource> T deserializeJson(Class<T> clazz, Boolean unwrapRootValue, String json) {
-        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectMapper objectMapper = new ObjectMapper()
+                .enable(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS);
         if (unwrapRootValue) { // Unwrap the root value, if requested
             objectMapper.enable(DeserializationFeature.UNWRAP_ROOT_VALUE);
         }

@@ -2,6 +2,8 @@ package com.mwaltman.devops.web;
 
 import com.codahale.metrics.health.HealthCheck;
 import com.mwaltman.devops.api.HelloApi;
+import com.mwaltman.devops.api.delegate.digitalocean.DigitalOceanAccountApi;
+import com.mwaltman.devops.api.delegate.digitalocean.DigitalOceanDropletApi;
 import com.mwaltman.devops.framework.util.StringUtils;
 import com.mwaltman.devops.framework.AppConfiguration;
 import com.mwaltman.devops.framework.MonitorApplication;
@@ -43,9 +45,10 @@ public class WebApplication extends MonitorApplication {
     public void run(AppConfiguration configuration, Environment environment) throws Exception {
         environment.healthChecks().register("template", new TemplateHealthCheck(configuration.getTemplate()));
 
-        environment.jersey().register(
-                new HelloApi(configuration.getTemplate(),
-                        configuration.getDefaultName()));
+        environment.jersey().register(new HelloApi(configuration.getTemplate(), configuration.getDefaultName()));
+
+        environment.jersey().register(new DigitalOceanAccountApi(getExternalApi()));
+        environment.jersey().register(new DigitalOceanDropletApi(getExternalApi()));
 
         log.info("********** Running Health Checks **********");
         for (Map.Entry<String, HealthCheck.Result> entry : environment.healthChecks().runHealthChecks().entrySet()) {

@@ -1,7 +1,8 @@
 package com.mwaltman.devops.framework;
 
 import com.mwaltman.devops.framework.externalapi.ApiClient;
-import com.mwaltman.devops.framework.externalapi.digitalocean.DigitalOceanAccountApi;
+import com.mwaltman.devops.framework.externalapi.digitalocean.ExternalDigitalOceanAccountApi;
+import com.mwaltman.devops.framework.externalapi.digitalocean.ExternalDigitalOceanDropletApi;
 import com.mwaltman.devops.framework.health.DigitalOceanHealthCheck;
 import io.dropwizard.Configuration;
 import io.dropwizard.ConfiguredBundle;
@@ -41,7 +42,11 @@ public abstract class ExternalApiBundle<T extends Configuration> implements Conf
      */
     @Getter
     @Setter(AccessLevel.PROTECTED)
-    private DigitalOceanAccountApi digitalOceanAccountApi;
+    private ExternalDigitalOceanAccountApi externalDigitalOceanAccountApi;
+
+    @Getter
+    @Setter(AccessLevel.PROTECTED)
+    private ExternalDigitalOceanDropletApi externalDigitalOceanDropletApi;
 
     /**
      * Populate the DigitalOcean API key. Must be overridden by a subclass.
@@ -58,8 +63,9 @@ public abstract class ExternalApiBundle<T extends Configuration> implements Conf
     @Override
     public void run(T configuration, Environment environment) throws Exception {
         log.info("Running ExternalApiBundle");
-        digitalOceanAccountApi = new DigitalOceanAccountApi(populateDigitalOceanApiKey(configuration), apiClient);
+        externalDigitalOceanAccountApi = new ExternalDigitalOceanAccountApi(populateDigitalOceanApiKey(configuration), apiClient);
+        externalDigitalOceanDropletApi = new ExternalDigitalOceanDropletApi(populateDigitalOceanApiKey(configuration), apiClient);
 
-        environment.healthChecks().register(HEALTH_CHECK_DIGITAL_OCEAN, new DigitalOceanHealthCheck(digitalOceanAccountApi));
+        environment.healthChecks().register(HEALTH_CHECK_DIGITAL_OCEAN, new DigitalOceanHealthCheck(externalDigitalOceanAccountApi));
     }
 }
