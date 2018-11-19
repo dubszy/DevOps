@@ -27,7 +27,7 @@ import lombok.Getter;
 @Getter
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 @JsonRootName("account")
-public class DigitalOceanAccountResponseResource extends ApiResponseResource {
+public class DigitalOceanAccountResource extends ApiResponseResource {
 
     private Integer dropletLimit;
     private Integer floatingIpLimit;
@@ -38,16 +38,16 @@ public class DigitalOceanAccountResponseResource extends ApiResponseResource {
     private String status;
     private String statusMessage;
 
-    public DigitalOceanAccountResponseResource() { }
+    public DigitalOceanAccountResource() { }
 
-    public DigitalOceanAccountResponseResource(Integer dropletLimit,
-                                               Integer floatingIpLimit,
-                                               Integer volumeLimit,
-                                               String email,
-                                               String uuid,
-                                               Boolean emailVerified,
-                                               String status,
-                                               String statusMessage) {
+    public DigitalOceanAccountResource(Integer dropletLimit,
+                                       Integer floatingIpLimit,
+                                       Integer volumeLimit,
+                                       String email,
+                                       String uuid,
+                                       Boolean emailVerified,
+                                       String status,
+                                       String statusMessage) {
         this.dropletLimit = dropletLimit;
         this.floatingIpLimit = floatingIpLimit;
         this.volumeLimit = volumeLimit;
