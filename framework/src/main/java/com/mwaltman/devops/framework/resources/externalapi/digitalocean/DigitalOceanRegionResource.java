@@ -13,4 +13,6 @@ public class DigitalOceanRegionResource {
     private String name;
     private String slug;
     private List<String> sizes;
+    private Boolean available;
+    private List<String> features;
 }
