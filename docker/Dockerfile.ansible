@@ -1,0 +1,13 @@
+FROM ubuntu:xenial
+
+RUN apt-get update -y --fix-missing \
+    && set -ex \
+    && export DEBIAN_FRONTEND=noninteractive \
+    && apt-get install -y software-properties-common \
+    && apt-add-repository --yes --update ppa:ansible/ansible \
+    && apt-get install -y ansible \
+    && rm /etc/ansible/hosts
+
+COPY ansible/hosts /etc/ansible/hosts
+
+ENTRYPOINT tail -f /dev/null
