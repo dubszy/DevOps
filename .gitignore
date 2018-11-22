@@ -4,6 +4,7 @@
 .idea
 *.iml
 
+ansible/hosts
 etcd-config.sh
 gradle.properties
 sensitive_config.yml

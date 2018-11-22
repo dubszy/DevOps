@@ -1,5 +1,9 @@
 version: '3.7'
 services:
+  ansible:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.ansible
   artifactory:
     build:
       context: .
