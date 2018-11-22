@@ -1,6 +1,8 @@
 package com.mwaltman.devops.framework.resources.externalapi.digitalocean;
 
 import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.mwaltman.devops.framework.resources.externalapi.ApiResponseResource;
@@ -13,16 +15,13 @@ import lombok.Getter;
  * Annotated with:
  * <br/>
  * <b>Getter</b>: Auto-generates getters for all fields
- * <br/><br/>
- * <b>JsonNaming(SnakeCaseStrategy)</b>: Instructs Jackson to convert JSON values from
- *      snake_case to camelCase
- * <br/><br/>
- * <b>JsonRootName</b>: When the {@link
- *      com.fasterxml.jackson.databind.DeserializationFeature#UNWRAP_ROOT_VALUE
- *      unwrap root value feature} is
- *      {@link com.fasterxml.jackson.databind.ObjectMapper#enable(
- *              com.fasterxml.jackson.databind.DeserializationFeature) enabled},
- *      the value is the name of the root node to unwrap.
+ * <br/>
+ * <b>JsonNaming(SnakeCaseStrategy)</b>: Instructs Jackson to convert JSON
+ * values from {@code snake_case} to {@code camelCase}
+ * <br/>
+ * <b>JsonRootName</b>: When the {@link DeserializationFeature#UNWRAP_ROOT_VALUE
+ * unwrap root value feature} is {@link ObjectMapper#enable(DeserializationFeature)
+ * enabled}, the value is the name of the root node to unwrap.
  */
 @Getter
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)

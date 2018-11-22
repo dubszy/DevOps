@@ -8,6 +8,9 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+/**
+ * DigitalOcean Droplet API
+ */
 @Path("/api/v1/digitalocean/droplets")
 @Produces(MediaType.APPLICATION_JSON)
 public class DigitalOceanDropletApi {
@@ -18,6 +21,11 @@ public class DigitalOceanDropletApi {
         this.externalApiBundle = externalApiBundle;
     }
 
+    /**
+     * Get all DigitalOcean Droplets.
+     *
+     * @return Resource containing all Droplets
+     */
     @GET
     public DigitalOceanDropletsResource getAllDroplets() {
         return externalApiBundle

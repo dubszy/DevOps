@@ -8,6 +8,9 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+/**
+ * DigitalOcean Account API
+ */
 @Path("/api/v1/digitalocean/account")
 @Produces(MediaType.APPLICATION_JSON)
 public class DigitalOceanAccountApi {
@@ -18,6 +21,11 @@ public class DigitalOceanAccountApi {
         this.externalApiBundle = externalApiBundle;
     }
 
+    /**
+     * Get DigitalOcean Account information.
+     *
+     * @return Resource representing the Account
+     */
     @GET
     public DigitalOceanAccountResource getAccountInformation() {
         return externalApiBundle

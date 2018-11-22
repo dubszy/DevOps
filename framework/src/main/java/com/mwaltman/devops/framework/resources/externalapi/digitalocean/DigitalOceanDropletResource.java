@@ -11,7 +11,7 @@ import java.util.List;
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class DigitalOceanDropletResource {
 
-    private Integer id;
+    private Long id;
     private String name;
     private Integer memory;
     private Integer vcpus;
@@ -20,8 +20,8 @@ public class DigitalOceanDropletResource {
     private Boolean locked;
     private String createdAt;
     private String status;
-    private List<Integer> backupIds;
-    private List<Integer> snapshotIds;
+    private List<Long> backupIds;
+    private List<Long> snapshotIds;
     private List<String> features;
     private DigitalOceanRegionResource region;
     private DigitalOceanImageResource image;

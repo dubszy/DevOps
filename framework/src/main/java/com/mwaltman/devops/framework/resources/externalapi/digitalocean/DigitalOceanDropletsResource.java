@@ -11,6 +11,13 @@ import java.util.List;
 /**
  * POJO for deserialization of responses to GET requests made to the /droplets
  * endpoint in the DigitalOcean API.
+ * <br/><br/>
+ * Annotated with:
+ * <br/>
+ * <b>Getter</b>: Auto-generates getters for all fields
+ * <br/>
+ * <b>JsonNaming(SnakeCaseStrategy)</b>: Instructs Jackson to convert JSON
+ * values from {@code snake_case} to {@code camelCase}
  */
 @Getter
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)

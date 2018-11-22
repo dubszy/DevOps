@@ -11,7 +11,7 @@ import java.util.List;
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class DigitalOceanImageResource {
 
-    private Integer id;
+    private Long id;
     private String name;
     private String type;
     private String distribution;

@@ -8,7 +8,7 @@ import lombok.Getter;
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class DigitalOceanKernelResource {
 
-    private Integer id;
+    private Long id;
     private String name;
     private String version;
 }
