@@ -1,14 +1,22 @@
 package com.mwaltman.devops.framework.externalapi.digitalocean;
 
 import com.mwaltman.devops.framework.externalapi.*;
+import com.mwaltman.devops.framework.resources.externalapi.ApiResponseResource;
 import com.mwaltman.devops.framework.resources.externalapi.digitalocean.DigitalOceanRegionResource;
+import com.mwaltman.devops.framework.resources.externalapi.digitalocean.request.DigitalOceanSnapshotRequestResource;
+import com.mwaltman.devops.framework.resources.externalapi.digitalocean.request.DigitalOceanVolumeRequestResource;
+import com.mwaltman.devops.framework.resources.externalapi.digitalocean.response.DigitalOceanSnapshotResponseResource;
 import com.mwaltman.devops.framework.resources.externalapi.digitalocean.response.DigitalOceanSnapshotsResponseResource;
 import com.mwaltman.devops.framework.resources.externalapi.digitalocean.response.DigitalOceanVolumeResponseResource;
 import com.mwaltman.devops.framework.resources.externalapi.digitalocean.response.DigitalOceanVolumesResponseResource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.ws.rs.core.MediaType;
+
+import static com.mwaltman.devops.framework.externalapi.RequestType.DELETE;
 import static com.mwaltman.devops.framework.externalapi.RequestType.GET;
+import static com.mwaltman.devops.framework.externalapi.RequestType.POST;
 
 /**
  * Defines and communicates with API endpoints for the DigitalOcean Volume API.
@@ -114,5 +122,75 @@ public class ExternalDigitalOceanVolumeApi extends ExternalApi {
         return deserializeJson(DigitalOceanSnapshotsResponseResource.class,
                 false,
                 response.getContent()).setResponse(response);
+    }
+
+    /**
+     * Create a DigitalOcean block storage volume.
+     *
+     * @param volume Resource describing the volume to create
+     *
+     * @return Resource representing the newly created volume
+     */
+    public DigitalOceanVolumeResponseResource createVolume(
+            DigitalOceanVolumeRequestResource volume) {
+        HttpResponse response = apiClient.call(
+                requestFactory.build(POST,
+                        "volumes",
+                        serializeJson(volume),
+                        MediaType.APPLICATION_JSON));
+        return deserializeJson(DigitalOceanVolumeResponseResource.class,
+                true,
+                response.getContent()).setResponse(response);
+    }
+
+    /**
+     * Create a snapshot from a DigitalOcean block storage volume.
+     *
+     * @param volumeId ID of the volume to create the snapshot from
+     * @param snapshot Resource describing the snapshot to create
+     *
+     * @return Resource representing the newly created snapshot
+     */
+    public DigitalOceanSnapshotResponseResource createSnapshot(
+            String volumeId,
+            DigitalOceanSnapshotRequestResource snapshot) {
+        HttpResponse response = apiClient.call(
+                requestFactory.build(POST,
+                        "volumes/" + volumeId + "/snapshots",
+                        serializeJson(snapshot),
+                        MediaType.APPLICATION_JSON));
+        return deserializeJson(DigitalOceanSnapshotResponseResource.class,
+                true,
+                response.getContent()).setResponse(response);
+    }
+
+    /**
+     * Delete a DigitalOcean block storage volume.
+     *
+     * @param volumeId ID of the volume to delete
+     *
+     * @return Resource representing the response; a successful response is 204
+     * (no content)
+     */
+    public ApiResponseResource deleteVolume(String volumeId) {
+        HttpResponse response = apiClient.call(
+                requestFactory.build(DELETE, "volumes/" + volumeId));
+        return new ApiResponseResource().setResponse(response);
+    }
+
+    /**
+     * Delete a DigitalOcean block storage volume by name.
+     *
+     * @param name Name of the volume to delete
+     * @param regionSlug Region the volume is in
+     *
+     * @return Resource representing the response; a successful response is 204
+     * (no content)
+     */
+    public ApiResponseResource deleteVolumeByName(String name, String regionSlug) {
+        HttpResponse response = apiClient.call(
+                requestFactory.build(DELETE, "volumes?name=" + name
+                                + "&region=" + regionSlug));
+        return new ApiResponseResource().setResponse(response);
     }
 }

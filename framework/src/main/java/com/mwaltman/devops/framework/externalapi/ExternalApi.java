@@ -1,7 +1,9 @@
 package com.mwaltman.devops.framework.externalapi;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mwaltman.devops.framework.resources.externalapi.ApiRequestResource;
 import com.mwaltman.devops.framework.resources.externalapi.ApiResponseResource;
 import com.mwaltman.devops.framework.util.StringUtils;
 import org.slf4j.Logger;
@@ -20,6 +22,29 @@ import static com.mwaltman.devops.framework.util.StringUtils.WS_28_SPACES;
 public abstract class ExternalApi {
 
     private static final Logger log = LoggerFactory.getLogger(ExternalApi.class);
+
+    /**
+     * Serialize an object to a string of JSON using Jackson.
+     *
+     * @param object Object to serialize the JSON from
+     * @param <T> Type of {@code object}
+     *
+     * @return String of JSON serialized from {@code object}, or an empty string
+     * if there was an issue while serializing
+     */
+    protected <T extends ApiRequestResource> String serializeJson(T object) {
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        try {
+            // Create a new writer and write the JSON
+            return objectMapper.writerFor(object.getClass())
+                    .writeValueAsString(object);
+        } catch (JsonProcessingException e) {
+            log.error("Failed to serialize object to JSON:\n{}",
+                    StringUtils.prettyException(e, WS_26_SPACES));
+        }
+        return "";
+    }
 
     /**
      * Deserialize a string of JSON into a class using Jackson.

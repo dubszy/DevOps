@@ -2,6 +2,10 @@ package com.mwaltman.devops.api.delegate.digitalocean;
 
 import com.mwaltman.devops.framework.ExternalApiBundle;
 import com.mwaltman.devops.framework.externalapi.digitalocean.ExternalDigitalOceanVolumeApi;
+import com.mwaltman.devops.framework.resources.externalapi.ApiResponseResource;
+import com.mwaltman.devops.framework.resources.externalapi.digitalocean.request.DigitalOceanSnapshotRequestResource;
+import com.mwaltman.devops.framework.resources.externalapi.digitalocean.request.DigitalOceanVolumeRequestResource;
+import com.mwaltman.devops.framework.resources.externalapi.digitalocean.response.DigitalOceanSnapshotResponseResource;
 import com.mwaltman.devops.framework.resources.externalapi.digitalocean.response.DigitalOceanSnapshotsResponseResource;
 import com.mwaltman.devops.framework.resources.externalapi.digitalocean.response.DigitalOceanVolumeResponseResource;
 import com.mwaltman.devops.framework.resources.externalapi.digitalocean.response.DigitalOceanVolumesResponseResource;
@@ -62,5 +66,44 @@ public class DigitalOceanVolumeApi {
         return externalApiBundle
                 .getExternalDigitalOceanVolumeApi()
                 .getSnapshotsForVolume(volumeId);
+    }
+
+    @POST
+    public DigitalOceanVolumeResponseResource createVolume(
+            DigitalOceanVolumeRequestResource volume) {
+
+        return externalApiBundle
+                .getExternalDigitalOceanVolumeApi()
+                .createVolume(volume);
+    }
+
+    @POST
+    @Path("/{id}/snapshots")
+    public DigitalOceanSnapshotResponseResource createSnapshot(
+            @PathParam("id") String volumeId,
+            DigitalOceanSnapshotRequestResource snapshot) {
+
+        return externalApiBundle
+                .getExternalDigitalOceanVolumeApi()
+                .createSnapshot(volumeId, snapshot);
+    }
+
+    @DELETE
+    @Path("/{id}")
+    public ApiResponseResource deleteVolume(@PathParam("id") String volumeId) {
+
+        return externalApiBundle
+                .getExternalDigitalOceanVolumeApi()
+                .deleteVolume(volumeId);
+    }
+
+    @DELETE
+    public ApiResponseResource deleteVolumeByName(
+            @QueryParam("name") String name,
+            @QueryParam("region") String region) {
+
+        return externalApiBundle
+                .getExternalDigitalOceanVolumeApi()
+                .deleteVolumeByName(name, region);
     }
 }
