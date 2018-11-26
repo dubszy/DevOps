@@ -5,6 +5,7 @@ import com.mwaltman.devops.api.HelloApi;
 import com.mwaltman.devops.api.delegate.digitalocean.DigitalOceanAccountApi;
 import com.mwaltman.devops.api.delegate.digitalocean.DigitalOceanActionApi;
 import com.mwaltman.devops.api.delegate.digitalocean.DigitalOceanDropletApi;
+import com.mwaltman.devops.api.delegate.digitalocean.DigitalOceanVolumeApi;
 import com.mwaltman.devops.framework.util.StringUtils;
 import com.mwaltman.devops.framework.AppConfiguration;
 import com.mwaltman.devops.framework.MonitorApplication;
@@ -51,6 +52,7 @@ public class WebApplication extends MonitorApplication {
         environment.jersey().register(new DigitalOceanAccountApi(getExternalApi()));
         environment.jersey().register(new DigitalOceanActionApi(getExternalApi()));
         environment.jersey().register(new DigitalOceanDropletApi(getExternalApi()));
+        environment.jersey().register(new DigitalOceanVolumeApi(getExternalApi()));
 
         log.info("********** Running Health Checks **********");
         for (Map.Entry<String, HealthCheck.Result> entry : environment.healthChecks().runHealthChecks().entrySet()) {
