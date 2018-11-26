@@ -2,8 +2,10 @@ package com.mwaltman.devops.framework.resources.externalapi;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mwaltman.devops.framework.externalapi.HttpResponse;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
+@EqualsAndHashCode
 public class ApiResponseResource {
 
     @Getter

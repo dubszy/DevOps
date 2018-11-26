@@ -46,6 +46,7 @@ public abstract class RequestFactory {
      *
      * @see RequestType Request types
      * @see #build(RequestType, String, Header[]) Build a request with headers
+     * @see #build(RequestType, String, String, String) Build a request with content and no headers
      * @see #build(RequestType, String, Header[], String, String) Build a request with headers and content
      */
     public <T extends HttpRequestBase> T build(RequestType requestType, String relativeUri) {
@@ -67,10 +68,36 @@ public abstract class RequestFactory {
      *
      * @see RequestType Request types
      * @see #build(RequestType, String) Build a request without headers
+     * @see #build(RequestType, String, String, String) Build a request with content and no headers
      * @see #build(RequestType, String, Header[], String, String) Build a request with headers and content
      */
     public <T extends HttpRequestBase> T build(RequestType requestType, String relativeUri, Header[] headers) {
         return build(requestType, relativeUri, headers, null, null);
+    }
+
+    /**
+     * Build a request with a request type, relative URI, and content.
+     *
+     * @param requestType Type of request to be built
+     * @param relativeUri URI to append to {@link #getBaseUri()}
+     * @param content Content (body) of the request
+     * @param contentType MIME type of {@code content}
+     * @param <T> Type of class that will be constructed (determined by the
+     *           class parameter of {@code requestType})
+     *
+     * @return Request ready to be {@link ApiClient#call(HttpRequestBase)
+     * executed}
+     *
+     * @see RequestType Request types
+     * @see #build(RequestType, String) Build a request without headers or content
+     * @see #build(RequestType, String, Header[]) Build a request with headers and no content
+     * @see #build(RequestType, String, Header[], String, String) Build a request with headers and content
+     */
+    public <T extends HttpRequestBase> T build(RequestType requestType,
+                                               String relativeUri,
+                                               String content,
+                                               String contentType) {
+        return build(requestType, relativeUri, null, content, contentType);
     }
 
     /**
@@ -90,7 +117,8 @@ public abstract class RequestFactory {
      *
      * @see RequestType Request types
      * @see #build(RequestType, String) Build a request with just type and URI
-     * @see #build(RequestType, String, Header[]) Build a request without content
+     * @see #build(RequestType, String, String, String) Build a request with content and no headers
+     * @see #build(RequestType, String, Header[]) Build a request with headers and no content
      */
     public <T extends HttpRequestBase> T build(RequestType requestType,
                                                String relativeUri,
