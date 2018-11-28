@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.mwaltman.devops.framework.resources.externalapi.ApiResponseResource;
-import com.mwaltman.devops.framework.resources.externalapi.digitalocean.DigitalOceanRegionResource;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -27,7 +26,7 @@ public class DigitalOceanVolumeResponseResource extends ApiResponseResource {
 
     private List<Long> dropletIds;
 
-    private DigitalOceanRegionResource region;
+    private DigitalOceanRegionResponseResource region;
 
     private String createdAt; // ISO8601 datetime
 

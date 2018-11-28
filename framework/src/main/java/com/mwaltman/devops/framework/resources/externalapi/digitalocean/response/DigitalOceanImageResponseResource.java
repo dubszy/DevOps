@@ -1,4 +1,4 @@
-package com.mwaltman.devops.framework.resources.externalapi.digitalocean;
+package com.mwaltman.devops.framework.resources.externalapi.digitalocean.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
@@ -9,7 +9,7 @@ import java.util.List;
 
 @Getter
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
-public class DigitalOceanImageResource {
+public class DigitalOceanImageResponseResource {
 
     private Long id;
     private String name;

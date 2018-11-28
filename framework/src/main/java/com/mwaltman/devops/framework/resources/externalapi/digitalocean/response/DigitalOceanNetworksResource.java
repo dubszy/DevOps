@@ -1,4 +1,4 @@
-package com.mwaltman.devops.framework.resources.externalapi.digitalocean;
+package com.mwaltman.devops.framework.resources.externalapi.digitalocean.response;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
@@ -10,6 +10,6 @@ import java.util.List;
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class DigitalOceanNetworksResource {
 
-    private List<DigitalOceanNetworkResource> v4;
-    private List<DigitalOceanNetworkResource> v6;
+    private List<DigitalOceanNetworkResponseResource> v4;
+    private List<DigitalOceanNetworkResponseResource> v6;
 }

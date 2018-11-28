@@ -5,8 +5,8 @@ import com.mwaltman.devops.framework.externalapi.DigitalOceanRequestFactory;
 import com.mwaltman.devops.framework.externalapi.ExternalApi;
 import com.mwaltman.devops.framework.externalapi.HttpResponse;
 import com.mwaltman.devops.framework.resources.externalapi.ApiResponseResource;
-import com.mwaltman.devops.framework.resources.externalapi.digitalocean.DigitalOceanActionResource;
-import com.mwaltman.devops.framework.resources.externalapi.digitalocean.DigitalOceanRegionResource;
+import com.mwaltman.devops.framework.resources.externalapi.digitalocean.response.DigitalOceanActionResponseResource;
+import com.mwaltman.devops.framework.resources.externalapi.digitalocean.response.DigitalOceanRegionResponseResource;
 import com.mwaltman.devops.framework.resources.externalapi.digitalocean.request.DigitalOceanSnapshotRequestResource;
 import com.mwaltman.devops.framework.resources.externalapi.digitalocean.request.DigitalOceanVolumeActionRequestResource;
 import com.mwaltman.devops.framework.resources.externalapi.digitalocean.request.DigitalOceanVolumeByNameDropletActionRequestResource;
@@ -59,7 +59,7 @@ public class ExternalDigitalOceanVolumeApi extends ExternalApi {
     /**
      * Get the DigitalOcean block storage volumes in a specific region.
      *
-     * @param regionSlug {@link DigitalOceanRegionResource#slug region} the
+     * @param regionSlug {@link DigitalOceanRegionResponseResource#slug region} the
      *                   volume is in
      *
      * @return Resource containing all volumes in the specified region
@@ -93,7 +93,7 @@ public class ExternalDigitalOceanVolumeApi extends ExternalApi {
      * array of volumes}, but it will only contain one volume.
      *
      * @param name {@link DigitalOceanVolumeResponseResource#name} of the volume
-     * @param regionSlug {@link DigitalOceanRegionResource#slug region} the
+     * @param regionSlug {@link DigitalOceanRegionResponseResource#slug region} the
      *                   volume is in
      *
      * @return Resource representing the volume
@@ -220,11 +220,11 @@ public class ExternalDigitalOceanVolumeApi extends ExternalApi {
      *
      * @return Resource representing the action
      */
-    public DigitalOceanActionResource getVolumeAction(String volumeId, String actionId) {
+    public DigitalOceanActionResponseResource getVolumeAction(String volumeId, String actionId) {
         HttpResponse response = apiClient.call(
                 requestFactory.build(GET,
                         "volumes/" + volumeId + "/actions/" + actionId));
-        return deserializeJson(DigitalOceanActionResource.class,
+        return deserializeJson(DigitalOceanActionResponseResource.class,
                 true,
                 response.getContent()).setResponse(response);
     }
@@ -237,14 +237,14 @@ public class ExternalDigitalOceanVolumeApi extends ExternalApi {
      *
      * @return Resource representing the result of the action
      */
-    public DigitalOceanActionResource performVolumeAction (
+    public DigitalOceanActionResponseResource performVolumeAction (
             String volumeId,
             DigitalOceanVolumeActionRequestResource volumeAction) {
         HttpResponse response = apiClient.call(requestFactory.build(POST,
                 "volumes/" + volumeId + "/actions",
                 serializeJson(volumeAction),
                 APPLICATION_JSON));
-        return deserializeJson(DigitalOceanActionResource.class,
+        return deserializeJson(DigitalOceanActionResponseResource.class,
                 true,
                 response.getContent()).setResponse(response);
     }
@@ -257,13 +257,13 @@ public class ExternalDigitalOceanVolumeApi extends ExternalApi {
      *
      * @return Resource representing the result of the action
      */
-    public DigitalOceanActionResource performVolumeActionByName(
+    public DigitalOceanActionResponseResource performVolumeActionByName(
             DigitalOceanVolumeByNameDropletActionRequestResource volumeAction) {
         HttpResponse response = apiClient.call(requestFactory.build(POST,
                 "volumes/actions",
                 serializeJson(volumeAction),
                 APPLICATION_JSON));
-        return deserializeJson(DigitalOceanActionResource.class,
+        return deserializeJson(DigitalOceanActionResponseResource.class,
                 true,
                 response.getContent()).setResponse(response);
     }

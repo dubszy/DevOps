@@ -1,4 +1,4 @@
-package com.mwaltman.devops.framework.resources.externalapi.digitalocean;
+package com.mwaltman.devops.framework.resources.externalapi.digitalocean.response;
 
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -26,7 +26,7 @@ import lombok.Getter;
 @Getter
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 @JsonRootName("action")
-public class DigitalOceanActionResource extends ApiResponseResource {
+public class DigitalOceanActionResponseResource extends ApiResponseResource {
 
     private Long id;
     private String status;
@@ -35,6 +35,6 @@ public class DigitalOceanActionResource extends ApiResponseResource {
     private String completedAt;
     private Long resourceId;
     private String resourceType;
-    private DigitalOceanRegionResource region;
+    private DigitalOceanRegionResponseResource region;
     private String regionSlug;
 }

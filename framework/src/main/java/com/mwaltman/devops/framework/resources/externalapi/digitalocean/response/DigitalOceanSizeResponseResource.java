@@ -1,4 +1,4 @@
-package com.mwaltman.devops.framework.resources.externalapi.digitalocean;
+package com.mwaltman.devops.framework.resources.externalapi.digitalocean.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
@@ -10,7 +10,7 @@ import java.util.List;
 
 @Getter
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
-public class DigitalOceanSizeResource {
+public class DigitalOceanSizeResponseResource {
 
     private String slug;
     private Boolean available;

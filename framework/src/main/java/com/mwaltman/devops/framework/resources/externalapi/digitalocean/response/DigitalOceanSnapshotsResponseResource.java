@@ -3,8 +3,6 @@ package com.mwaltman.devops.framework.resources.externalapi.digitalocean.respons
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.mwaltman.devops.framework.resources.externalapi.ApiResponseResource;
-import com.mwaltman.devops.framework.resources.externalapi.digitalocean.DigitalOceanLinksResource;
-import com.mwaltman.devops.framework.resources.externalapi.digitalocean.DigitalOceanMetaResource;
 import lombok.Getter;
 
 import java.util.List;
@@ -14,6 +12,6 @@ import java.util.List;
 public class DigitalOceanSnapshotsResponseResource extends ApiResponseResource {
 
     private List<DigitalOceanSnapshotResponseResource> snapshots;
-    private DigitalOceanLinksResource links;
-    private DigitalOceanMetaResource meta;
+    private DigitalOceanLinksResponseResource links;
+    private DigitalOceanMetaResponseResource meta;
 }

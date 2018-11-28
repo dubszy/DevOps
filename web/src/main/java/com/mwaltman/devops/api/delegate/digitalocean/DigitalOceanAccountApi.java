@@ -1,7 +1,7 @@
 package com.mwaltman.devops.api.delegate.digitalocean;
 
 import com.mwaltman.devops.framework.ExternalApiBundle;
-import com.mwaltman.devops.framework.resources.externalapi.digitalocean.DigitalOceanAccountResource;
+import com.mwaltman.devops.framework.resources.externalapi.digitalocean.response.DigitalOceanAccountResponseResource;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -27,7 +27,7 @@ public class DigitalOceanAccountApi {
      * @return Resource representing the Account
      */
     @GET
-    public DigitalOceanAccountResource getAccountInformation() {
+    public DigitalOceanAccountResponseResource getAccountInformation() {
         return externalApiBundle
                 .getExternalDigitalOceanAccountApi()
                 .getAccountInformation();
