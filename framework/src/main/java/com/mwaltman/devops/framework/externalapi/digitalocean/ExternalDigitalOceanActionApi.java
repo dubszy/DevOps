@@ -1,8 +1,11 @@
 package com.mwaltman.devops.framework.externalapi.digitalocean;
 
-import com.mwaltman.devops.framework.externalapi.*;
+import com.mwaltman.devops.framework.externalapi.ApiClient;
+import com.mwaltman.devops.framework.externalapi.DigitalOceanRequestFactory;
+import com.mwaltman.devops.framework.externalapi.ExternalApi;
+import com.mwaltman.devops.framework.externalapi.HttpResponse;
 import com.mwaltman.devops.framework.resources.externalapi.digitalocean.DigitalOceanActionResponseResource;
-import com.mwaltman.devops.framework.resources.externalapi.digitalocean.DigitalOceanActionsResponseResource;
+import com.mwaltman.devops.framework.resources.externalapi.digitalocean.response.DigitalOceanActionsResponseResource;
 
 import static com.mwaltman.devops.framework.externalapi.RequestType.GET;
 

@@ -2,7 +2,7 @@ package com.mwaltman.devops.api.delegate.digitalocean;
 
 import com.mwaltman.devops.framework.ExternalApiBundle;
 import com.mwaltman.devops.framework.resources.externalapi.digitalocean.DigitalOceanActionResponseResource;
-import com.mwaltman.devops.framework.resources.externalapi.digitalocean.DigitalOceanActionsResponseResource;
+import com.mwaltman.devops.framework.resources.externalapi.digitalocean.response.DigitalOceanActionsResponseResource;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
