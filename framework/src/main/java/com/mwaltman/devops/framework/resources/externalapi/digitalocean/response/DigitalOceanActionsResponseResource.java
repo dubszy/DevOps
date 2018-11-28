@@ -5,9 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.mwaltman.devops.framework.resources.externalapi.ApiResponseResource;
-import com.mwaltman.devops.framework.resources.externalapi.digitalocean.DigitalOceanActionResponseResource;
-import com.mwaltman.devops.framework.resources.externalapi.digitalocean.DigitalOceanLinksResponseResource;
-import com.mwaltman.devops.framework.resources.externalapi.digitalocean.DigitalOceanMetaResponseResource;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 

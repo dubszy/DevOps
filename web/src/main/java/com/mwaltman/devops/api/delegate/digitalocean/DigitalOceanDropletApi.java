@@ -1,7 +1,7 @@
 package com.mwaltman.devops.api.delegate.digitalocean;
 
 import com.mwaltman.devops.framework.ExternalApiBundle;
-import com.mwaltman.devops.framework.resources.externalapi.digitalocean.DigitalOceanDropletsResource;
+import com.mwaltman.devops.framework.resources.externalapi.digitalocean.response.DigitalOceanDropletsResource;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;

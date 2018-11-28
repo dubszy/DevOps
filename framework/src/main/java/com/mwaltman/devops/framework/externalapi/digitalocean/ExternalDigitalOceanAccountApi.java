@@ -4,7 +4,7 @@ import com.mwaltman.devops.framework.externalapi.ApiClient;
 import com.mwaltman.devops.framework.externalapi.DigitalOceanRequestFactory;
 import com.mwaltman.devops.framework.externalapi.ExternalApi;
 import com.mwaltman.devops.framework.externalapi.HttpResponse;
-import com.mwaltman.devops.framework.resources.externalapi.digitalocean.DigitalOceanAccountResponseResource;
+import com.mwaltman.devops.framework.resources.externalapi.digitalocean.response.DigitalOceanAccountResponseResource;
 
 import static com.mwaltman.devops.framework.externalapi.RequestType.GET;
 
