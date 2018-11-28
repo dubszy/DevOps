@@ -1,8 +1,8 @@
 package com.mwaltman.devops.api.delegate.digitalocean;
 
 import com.mwaltman.devops.framework.ExternalApiBundle;
-import com.mwaltman.devops.framework.resources.externalapi.digitalocean.DigitalOceanActionResource;
-import com.mwaltman.devops.framework.resources.externalapi.digitalocean.DigitalOceanActionsResource;
+import com.mwaltman.devops.framework.resources.externalapi.digitalocean.DigitalOceanActionResponseResource;
+import com.mwaltman.devops.framework.resources.externalapi.digitalocean.DigitalOceanActionsResponseResource;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -29,7 +29,7 @@ public class DigitalOceanActionApi {
      * @return Resource containing all Actions
      */
     @GET
-    public DigitalOceanActionsResource getAllActions() {
+    public DigitalOceanActionsResponseResource getAllActions() {
         return externalApiBundle
                 .getExternalDigitalOceanActionApi()
                 .getAllActions();
@@ -43,7 +43,7 @@ public class DigitalOceanActionApi {
      */
     @GET
     @Path("/{id}")
-    public DigitalOceanActionResource getAction(@PathParam("id") String id) {
+    public DigitalOceanActionResponseResource getAction(@PathParam("id") String id) {
         return externalApiBundle
                 .getExternalDigitalOceanActionApi()
                 .getAction(id);

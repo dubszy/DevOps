@@ -26,9 +26,9 @@ import java.util.List;
  */
 @Getter
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
-public class DigitalOceanActionsResource extends ApiResponseResource {
+public class DigitalOceanActionsResponseResource extends ApiResponseResource {
 
-    private List<DigitalOceanActionResource> actions;
-    private DigitalOceanLinksResource links;
-    private DigitalOceanMetaResource meta;
+    private List<DigitalOceanActionResponseResource> actions;
+    private DigitalOceanLinksResponseResource links;
+    private DigitalOceanMetaResponseResource meta;
 }

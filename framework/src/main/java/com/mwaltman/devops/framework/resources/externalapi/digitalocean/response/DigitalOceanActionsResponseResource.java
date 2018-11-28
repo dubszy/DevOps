@@ -3,9 +3,9 @@ package com.mwaltman.devops.framework.resources.externalapi.digitalocean.respons
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.mwaltman.devops.framework.resources.externalapi.ApiResponseResource;
-import com.mwaltman.devops.framework.resources.externalapi.digitalocean.DigitalOceanActionResource;
-import com.mwaltman.devops.framework.resources.externalapi.digitalocean.DigitalOceanLinksResource;
-import com.mwaltman.devops.framework.resources.externalapi.digitalocean.DigitalOceanMetaResource;
+import com.mwaltman.devops.framework.resources.externalapi.digitalocean.DigitalOceanActionResponseResource;
+import com.mwaltman.devops.framework.resources.externalapi.digitalocean.DigitalOceanLinksResponseResource;
+import com.mwaltman.devops.framework.resources.externalapi.digitalocean.DigitalOceanMetaResponseResource;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
@@ -16,7 +16,7 @@ import java.util.List;
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class DigitalOceanActionsResponseResource extends ApiResponseResource {
 
-    private List<DigitalOceanActionResource> actions;
-    private DigitalOceanLinksResource links;
-    private DigitalOceanMetaResource meta;
+    private List<DigitalOceanActionResponseResource> actions;
+    private DigitalOceanLinksResponseResource links;
+    private DigitalOceanMetaResponseResource meta;
 }

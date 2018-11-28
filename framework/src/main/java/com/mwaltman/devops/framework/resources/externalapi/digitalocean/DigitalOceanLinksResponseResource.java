@@ -6,7 +6,7 @@ import lombok.Getter;
 
 @Getter
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
-public class DigitalOceanMetaResource {
+public class DigitalOceanLinksResponseResource {
 
-    private Integer total;
+    private DigitalOceanPagesResponseResource pages;
 }

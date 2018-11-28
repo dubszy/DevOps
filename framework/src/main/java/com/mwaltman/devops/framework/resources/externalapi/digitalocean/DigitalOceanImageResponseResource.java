@@ -9,7 +9,7 @@ import java.util.List;
 
 @Getter
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
-public class DigitalOceanImageResource {
+public class DigitalOceanImageResponseResource {
 
     private Long id;
     private String name;

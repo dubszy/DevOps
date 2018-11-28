@@ -9,7 +9,7 @@ import java.util.List;
 
 @Getter
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
-public class DigitalOceanDropletResource {
+public class DigitalOceanDropletResponseResource {
 
     private Long id;
     private String name;
@@ -23,13 +23,13 @@ public class DigitalOceanDropletResource {
     private List<Long> backupIds;
     private List<Long> snapshotIds;
     private List<String> features;
-    private DigitalOceanRegionResource region;
-    private DigitalOceanImageResource image;
-    private DigitalOceanSizeResource size;
+    private DigitalOceanRegionResponseResource region;
+    private DigitalOceanImageResponseResource image;
+    private DigitalOceanSizeResponseResource size;
     private String sizeSlug;
     private DigitalOceanNetworksResource networks;
-    private DigitalOceanKernelResource kernel;
-    private DigitalOceanBackupWindowResource nextBackupWindow;
+    private DigitalOceanKernelResponseResource kernel;
+    private DigitalOceanBackupWindowResponseResource nextBackupWindow;
     private List<String> tags;
     @JsonProperty("volume_ids")
     private List<String> volumeUuids;

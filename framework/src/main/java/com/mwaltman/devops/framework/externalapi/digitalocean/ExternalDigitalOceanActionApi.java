@@ -1,8 +1,8 @@
 package com.mwaltman.devops.framework.externalapi.digitalocean;
 
 import com.mwaltman.devops.framework.externalapi.*;
-import com.mwaltman.devops.framework.resources.externalapi.digitalocean.DigitalOceanActionResource;
-import com.mwaltman.devops.framework.resources.externalapi.digitalocean.DigitalOceanActionsResource;
+import com.mwaltman.devops.framework.resources.externalapi.digitalocean.DigitalOceanActionResponseResource;
+import com.mwaltman.devops.framework.resources.externalapi.digitalocean.DigitalOceanActionsResponseResource;
 
 import static com.mwaltman.devops.framework.externalapi.RequestType.GET;
 
@@ -34,10 +34,10 @@ public class ExternalDigitalOceanActionApi extends ExternalApi {
      *
      * @return Resource containing all Actions
      */
-    public DigitalOceanActionsResource getAllActions() {
+    public DigitalOceanActionsResponseResource getAllActions() {
         HttpResponse response = apiClient.call(
                 requestFactory.build(GET, "actions"));
-        return deserializeJson(DigitalOceanActionsResource.class,
+        return deserializeJson(DigitalOceanActionsResponseResource.class,
                 false,
                 response.getContent()).setResponse(response);
     }
@@ -49,10 +49,10 @@ public class ExternalDigitalOceanActionApi extends ExternalApi {
      *
      * @return Resource representing the Action
      */
-    public DigitalOceanActionResource getAction(String id) {
+    public DigitalOceanActionResponseResource getAction(String id) {
         HttpResponse response = apiClient.call(
                 requestFactory.build(GET, "actions/" + id));
-        return deserializeJson(DigitalOceanActionResource.class,
+        return deserializeJson(DigitalOceanActionResponseResource.class,
                 true,
                 response.getContent()).setResponse(response);
     }

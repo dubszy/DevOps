@@ -23,7 +23,7 @@ import java.util.List;
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class DigitalOceanDropletsResource extends ApiResponseResource {
 
-    private List<DigitalOceanDropletResource> droplets;
-    private DigitalOceanLinksResource links;
-    private DigitalOceanMetaResource meta;
+    private List<DigitalOceanDropletResponseResource> droplets;
+    private DigitalOceanLinksResponseResource links;
+    private DigitalOceanMetaResponseResource meta;
 }

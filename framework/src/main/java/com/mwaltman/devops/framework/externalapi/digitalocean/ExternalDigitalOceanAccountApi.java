@@ -4,7 +4,7 @@ import com.mwaltman.devops.framework.externalapi.ApiClient;
 import com.mwaltman.devops.framework.externalapi.DigitalOceanRequestFactory;
 import com.mwaltman.devops.framework.externalapi.ExternalApi;
 import com.mwaltman.devops.framework.externalapi.HttpResponse;
-import com.mwaltman.devops.framework.resources.externalapi.digitalocean.DigitalOceanAccountResource;
+import com.mwaltman.devops.framework.resources.externalapi.digitalocean.DigitalOceanAccountResponseResource;
 
 import static com.mwaltman.devops.framework.externalapi.RequestType.GET;
 
@@ -41,12 +41,12 @@ public class ExternalDigitalOceanAccountApi extends ExternalApi {
      * Get the account information for the authenticated user.
      *
      * @return The account information deserialized into a
-     * {@link DigitalOceanAccountResource}
+     * {@link DigitalOceanAccountResponseResource}
      */
-    public DigitalOceanAccountResource getAccountInformation() {
+    public DigitalOceanAccountResponseResource getAccountInformation() {
         HttpResponse response = apiClient.call(
                 requestFactory.build(GET, "account"));
-        return deserializeJson(DigitalOceanAccountResource.class,
+        return deserializeJson(DigitalOceanAccountResponseResource.class,
                 true,
                 response.getContent()).setResponse(response);
     }

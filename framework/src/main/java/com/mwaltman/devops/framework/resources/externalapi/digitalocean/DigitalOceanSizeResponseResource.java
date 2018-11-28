@@ -10,7 +10,7 @@ import java.util.List;
 
 @Getter
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
-public class DigitalOceanSizeResource {
+public class DigitalOceanSizeResponseResource {
 
     private String slug;
     private Boolean available;

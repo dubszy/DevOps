@@ -3,7 +3,7 @@ package com.mwaltman.devops.api.delegate.digitalocean;
 import com.mwaltman.devops.framework.ExternalApiBundle;
 import com.mwaltman.devops.framework.externalapi.digitalocean.ExternalDigitalOceanVolumeApi;
 import com.mwaltman.devops.framework.resources.externalapi.ApiResponseResource;
-import com.mwaltman.devops.framework.resources.externalapi.digitalocean.DigitalOceanActionResource;
+import com.mwaltman.devops.framework.resources.externalapi.digitalocean.DigitalOceanActionResponseResource;
 import com.mwaltman.devops.framework.resources.externalapi.digitalocean.request.DigitalOceanSnapshotRequestResource;
 import com.mwaltman.devops.framework.resources.externalapi.digitalocean.request.DigitalOceanVolumeActionRequestResource;
 import com.mwaltman.devops.framework.resources.externalapi.digitalocean.request.DigitalOceanVolumeByNameDropletActionRequestResource;
@@ -119,7 +119,7 @@ public class DigitalOceanVolumeApi {
 
     @GET
     @Path("/{vId}/actions/{aId}")
-    public DigitalOceanActionResource getAction(
+    public DigitalOceanActionResponseResource getAction(
             @PathParam("vId") String volumeId,
             @PathParam("aId") String actionId) {
 
@@ -130,7 +130,7 @@ public class DigitalOceanVolumeApi {
 
     @POST
     @Path("/{id}/actions")
-    public DigitalOceanActionResource performAction(
+    public DigitalOceanActionResponseResource performAction(
             @PathParam("id") String volumeId,
             DigitalOceanVolumeActionRequestResource volumeAction) {
 
@@ -141,7 +141,7 @@ public class DigitalOceanVolumeApi {
 
     @POST
     @Path("/actions")
-    public DigitalOceanActionResource performActionByName(
+    public DigitalOceanActionResponseResource performActionByName(
             DigitalOceanVolumeByNameDropletActionRequestResource volumeAction) {
 
         return externalApiBundle

@@ -6,8 +6,8 @@ import lombok.Getter;
 
 @Getter
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
-public class DigitalOceanPagesResource {
+public class DigitalOceanBackupWindowResponseResource {
 
-    private String last;
-    private String next;
+    private String start;
+    private String end;
 }
