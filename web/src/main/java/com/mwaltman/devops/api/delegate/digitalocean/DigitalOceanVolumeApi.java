@@ -3,12 +3,12 @@ package com.mwaltman.devops.api.delegate.digitalocean;
 import com.mwaltman.devops.framework.ExternalApiBundle;
 import com.mwaltman.devops.framework.externalapi.digitalocean.ExternalDigitalOceanVolumeApi;
 import com.mwaltman.devops.framework.resources.externalapi.ApiResponseResource;
+import com.mwaltman.devops.framework.resources.externalapi.digitalocean.DigitalOceanActionResource;
 import com.mwaltman.devops.framework.resources.externalapi.digitalocean.request.DigitalOceanSnapshotRequestResource;
+import com.mwaltman.devops.framework.resources.externalapi.digitalocean.request.DigitalOceanVolumeActionRequestResource;
+import com.mwaltman.devops.framework.resources.externalapi.digitalocean.request.DigitalOceanVolumeByNameDropletActionRequestResource;
 import com.mwaltman.devops.framework.resources.externalapi.digitalocean.request.DigitalOceanVolumeRequestResource;
-import com.mwaltman.devops.framework.resources.externalapi.digitalocean.response.DigitalOceanSnapshotResponseResource;
-import com.mwaltman.devops.framework.resources.externalapi.digitalocean.response.DigitalOceanSnapshotsResponseResource;
-import com.mwaltman.devops.framework.resources.externalapi.digitalocean.response.DigitalOceanVolumeResponseResource;
-import com.mwaltman.devops.framework.resources.externalapi.digitalocean.response.DigitalOceanVolumesResponseResource;
+import com.mwaltman.devops.framework.resources.externalapi.digitalocean.response.*;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -105,5 +105,47 @@ public class DigitalOceanVolumeApi {
         return externalApiBundle
                 .getExternalDigitalOceanVolumeApi()
                 .deleteVolumeByName(name, region);
+    }
+
+    @GET
+    @Path("/{id}/actions")
+    public DigitalOceanActionsResponseResource getActions(
+            @PathParam("id") String volumeId) {
+
+        return externalApiBundle
+                .getExternalDigitalOceanVolumeApi()
+                .getVolumeActions(volumeId);
+    }
+
+    @GET
+    @Path("/{vId}/actions/{aId}")
+    public DigitalOceanActionResource getAction(
+            @PathParam("vId") String volumeId,
+            @PathParam("aId") String actionId) {
+
+        return externalApiBundle
+                .getExternalDigitalOceanVolumeApi()
+                .getVolumeAction(volumeId, actionId);
+    }
+
+    @POST
+    @Path("/{id}/actions")
+    public DigitalOceanActionResource performAction(
+            @PathParam("id") String volumeId,
+            DigitalOceanVolumeActionRequestResource volumeAction) {
+
+        return externalApiBundle
+                .getExternalDigitalOceanVolumeApi()
+                .performVolumeAction(volumeId, volumeAction);
+    }
+
+    @POST
+    @Path("/actions")
+    public DigitalOceanActionResource performActionByName(
+            DigitalOceanVolumeByNameDropletActionRequestResource volumeAction) {
+
+        return externalApiBundle
+                .getExternalDigitalOceanVolumeApi()
+                .performVolumeActionByName(volumeAction);
     }
 }
