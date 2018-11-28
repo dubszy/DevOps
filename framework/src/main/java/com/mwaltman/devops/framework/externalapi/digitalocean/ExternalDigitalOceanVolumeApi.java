@@ -1,14 +1,22 @@
 package com.mwaltman.devops.framework.externalapi.digitalocean;
 
-import com.mwaltman.devops.framework.externalapi.*;
+import com.mwaltman.devops.framework.externalapi.ApiClient;
+import com.mwaltman.devops.framework.externalapi.DigitalOceanRequestFactory;
+import com.mwaltman.devops.framework.externalapi.ExternalApi;
+import com.mwaltman.devops.framework.externalapi.HttpResponse;
+import com.mwaltman.devops.framework.resources.externalapi.ApiResponseResource;
+import com.mwaltman.devops.framework.resources.externalapi.digitalocean.DigitalOceanActionResource;
 import com.mwaltman.devops.framework.resources.externalapi.digitalocean.DigitalOceanRegionResource;
-import com.mwaltman.devops.framework.resources.externalapi.digitalocean.response.DigitalOceanSnapshotsResponseResource;
-import com.mwaltman.devops.framework.resources.externalapi.digitalocean.response.DigitalOceanVolumeResponseResource;
-import com.mwaltman.devops.framework.resources.externalapi.digitalocean.response.DigitalOceanVolumesResponseResource;
+import com.mwaltman.devops.framework.resources.externalapi.digitalocean.request.DigitalOceanSnapshotRequestResource;
+import com.mwaltman.devops.framework.resources.externalapi.digitalocean.request.DigitalOceanVolumeActionRequestResource;
+import com.mwaltman.devops.framework.resources.externalapi.digitalocean.request.DigitalOceanVolumeByNameDropletActionRequestResource;
+import com.mwaltman.devops.framework.resources.externalapi.digitalocean.request.DigitalOceanVolumeRequestResource;
+import com.mwaltman.devops.framework.resources.externalapi.digitalocean.response.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static com.mwaltman.devops.framework.externalapi.RequestType.GET;
+import static com.mwaltman.devops.framework.externalapi.RequestType.*;
+import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 
 /**
  * Defines and communicates with API endpoints for the DigitalOcean Volume API.
@@ -113,6 +121,150 @@ public class ExternalDigitalOceanVolumeApi extends ExternalApi {
                 "volumes/" + volumeId + "/snapshots"));
         return deserializeJson(DigitalOceanSnapshotsResponseResource.class,
                 false,
+                response.getContent()).setResponse(response);
+    }
+
+    /**
+     * Create a DigitalOcean block storage volume.
+     *
+     * @param volume Resource describing the volume to create
+     *
+     * @return Resource representing the newly created volume
+     */
+    public DigitalOceanVolumeResponseResource createVolume(
+            DigitalOceanVolumeRequestResource volume) {
+        HttpResponse response = apiClient.call(
+                requestFactory.build(POST,
+                        "volumes",
+                        serializeJson(volume),
+                        APPLICATION_JSON));
+        return deserializeJson(DigitalOceanVolumeResponseResource.class,
+                true,
+                response.getContent()).setResponse(response);
+    }
+
+    /**
+     * Create a snapshot from a DigitalOcean block storage volume.
+     *
+     * @param volumeId ID of the volume to create the snapshot from
+     * @param snapshot Resource describing the snapshot to create
+     *
+     * @return Resource representing the newly created snapshot
+     */
+    public DigitalOceanSnapshotResponseResource createSnapshot(
+            String volumeId,
+            DigitalOceanSnapshotRequestResource snapshot) {
+        HttpResponse response = apiClient.call(
+                requestFactory.build(POST,
+                        "volumes/" + volumeId + "/snapshots",
+                        serializeJson(snapshot),
+                        APPLICATION_JSON));
+        return deserializeJson(DigitalOceanSnapshotResponseResource.class,
+                true,
+                response.getContent()).setResponse(response);
+    }
+
+    /**
+     * Delete a DigitalOcean block storage volume.
+     *
+     * @param volumeId ID of the volume to delete
+     *
+     * @return Resource representing the response; a successful response is 204
+     * (no content)
+     */
+    public ApiResponseResource deleteVolume(String volumeId) {
+        HttpResponse response = apiClient.call(
+                requestFactory.build(DELETE, "volumes/" + volumeId));
+        return new ApiResponseResource().setResponse(response);
+    }
+
+    /**
+     * Delete a DigitalOcean block storage volume by name.
+     *
+     * @param name Name of the volume to delete
+     * @param regionSlug Region the volume is in
+     *
+     * @return Resource representing the response; a successful response is 204
+     * (no content)
+     */
+    public ApiResponseResource deleteVolumeByName(String name, String regionSlug) {
+        HttpResponse response = apiClient.call(
+                requestFactory.build(DELETE, "volumes?name=" + name
+                                + "&region=" + regionSlug));
+        return new ApiResponseResource().setResponse(response);
+    }
+
+    /**
+     * Get all actions that have been executed on a DigitalOcean block storage
+     * volume.
+     *
+     * @param volumeId ID of the volume
+     *
+     * @return Resource representing all actions
+     */
+    public DigitalOceanActionsResponseResource getVolumeActions(String volumeId) {
+        HttpResponse response = apiClient.call(
+                requestFactory.build(GET,
+                        "volumes/" + volumeId + "/actions"));
+        return deserializeJson(DigitalOceanActionsResponseResource.class,
+                false,
+                response.getContent()).setResponse(response);
+    }
+
+    /**
+     * Get the status of a specific action executed on a DigitalOcean block
+     * storage volume.
+     *
+     * @param volumeId ID of the volume
+     * @param actionId ID of the action
+     *
+     * @return Resource representing the action
+     */
+    public DigitalOceanActionResource getVolumeAction(String volumeId, String actionId) {
+        HttpResponse response = apiClient.call(
+                requestFactory.build(GET,
+                        "volumes/" + volumeId + "/actions/" + actionId));
+        return deserializeJson(DigitalOceanActionResource.class,
+                true,
+                response.getContent()).setResponse(response);
+    }
+
+    /**
+     * Perform an action on a DigitalOcean block storage volume
+     *
+     * @param volumeId ID of the volume
+     * @param volumeAction Action to perform
+     *
+     * @return Resource representing the result of the action
+     */
+    public DigitalOceanActionResource performVolumeAction (
+            String volumeId,
+            DigitalOceanVolumeActionRequestResource volumeAction) {
+        HttpResponse response = apiClient.call(requestFactory.build(POST,
+                "volumes/" + volumeId + "/actions",
+                serializeJson(volumeAction),
+                APPLICATION_JSON));
+        return deserializeJson(DigitalOceanActionResource.class,
+                true,
+                response.getContent()).setResponse(response);
+    }
+
+    /**
+     * Perform an action on a DigitalOcean block storage volume identified by
+     * the volume's name.
+     *
+     * @param volumeAction Action to perform
+     *
+     * @return Resource representing the result of the action
+     */
+    public DigitalOceanActionResource performVolumeActionByName(
+            DigitalOceanVolumeByNameDropletActionRequestResource volumeAction) {
+        HttpResponse response = apiClient.call(requestFactory.build(POST,
+                "volumes/actions",
+                serializeJson(volumeAction),
+                APPLICATION_JSON));
+        return deserializeJson(DigitalOceanActionResource.class,
+                true,
                 response.getContent()).setResponse(response);
     }
 }
